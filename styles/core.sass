@@ -1,2 +1,9 @@
+@import "functions.scss"
+@import "mixins.scss"
+@import "variables.scss"
+
 body
   color: black
+
+  @include media-breakpoint-down(sm)
+    color: blue

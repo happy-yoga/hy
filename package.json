@@ -8,13 +8,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "watch:start": "chokidar 'index.js' 'lib/**/*' -c 'npm start' --initial",
-    "build:styles": "sass ./styles:./dist/styles",
+    "build:styles": "sass ./styles:./dist/styles -I 'node_modules/bootstrap/scss'",
     "watch:styles": "chokidar 'styles/**/*' -c 'npm run build:styles' --initial",
     "build": "run-p build:*",
     "watch": "run-p watch:*"
   },
   "description": "",
   "devDependencies": {
+    "bootstrap": "^4.3.1",
     "chokidar-cli": "^1.2.2",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
