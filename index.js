@@ -1,10 +1,9 @@
 require('dotenv').config()
 
 const app = require('./lib/app.js')
+const { landingPage } = require('./lib/controller.js')
 
-app.get('/', (req, res) => {
-  res.render('index')
-})
+app.get('/', landingPage)
 
 const port = process.env.PORT
 
