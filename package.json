@@ -9,7 +9,7 @@
     "start": "node index.js",
     "watch:start": "nodemon --watch index.js --watch lib/**/* --exec 'npm start'",
     "build:styles": "sass ./styles:./build/styles -I 'node_modules/bootstrap/scss'",
-    "watch:styles": "nodemon --watch styles/**/* --exec 'npm run build:styles'",
+    "watch:styles": "chokidar 'styles/**/*' -c 'npm run build:styles' --initial",
     "build:images": "node scripts/image-build.js -s ./images -o dist/images",
     "build:images": "node scripts/image-build.js -s ./images -o dist/images",
     "watch:images": "chokidar 'images/**/*' -c 'npm run build:images' --initial",
