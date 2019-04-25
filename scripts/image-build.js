@@ -1,4 +1,3 @@
-const path = require('path')
 const args = require('args')
 const imagemin = require('imagemin')
 
