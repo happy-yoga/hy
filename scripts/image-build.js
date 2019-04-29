@@ -28,7 +28,7 @@ const build = async (sourceDir, outputDir) => {
     {
       plugins: [
         imageminMozjpeg(),
-        imageminPngquant({ quality: '65-80' }),
+        imageminPngquant({ quality: [0.65, 0.8] }),
         imageminSvgo()
       ]
     }
