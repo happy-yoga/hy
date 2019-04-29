@@ -3,10 +3,11 @@ extends layouts/base
 block content
   header.container-fluid
     hero-teaser(background="/images/_julia-schlenkert-yoga-unterricht-anusara.jpg")
-      hero-layer
-        picture.main-logo
-          source(srcset="/images/happy-yoga-main.svg" type="image/svg+xml")
-          img(src="/images/happy-yoga-main.png" alt="")
+      include components/main-nav
+      
+      picture.main-logo
+        source(srcset="/images/happy-yoga-main.svg" type="image/svg+xml")
+        img(src="/images/happy-yoga-main.png" alt="")
 
 
   main.container-fluid

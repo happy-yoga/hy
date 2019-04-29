@@ -1,0 +1,33 @@
+main-nav
+  background-color: transparent
+  +make-row
+  +make-container
+  padding-top: 1rem
+
+
+  main-entries, secondary-entries
+    +media-breakpoint-between(lg, xl)
+      +make-col-ready
+
+  main-entries
+    +media-breakpoint-between(lg, xl)
+      +make-col(6)
+
+      a
+        margin-left: 1rem
+
+
+  secondary-entries
+    +media-breakpoint-between(lg, xl)
+      text-align: right
+      +make-col(5)
+      +make-col-offset(1)
+
+      a
+        margin-right: 1rem
+
+
+  a
+    color: #000
+    padding: .3rem .5rem
+    text-transform: uppercase
