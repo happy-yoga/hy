@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "watch:start": "nodemon --watch index.js --watch lib/**/* --watch dist/styles/manifest.json --exec 'npm start'",
+    "watch:start": "nodemon --watch index.js --watch lib/**/* --exec 'npm start'",
     "prebuild:styles": "rm -rf build/styles dist/styles",
     "build:styles": "sass ./styles:./build/styles -I 'node_modules/bootstrap/scss'",
     "postbuild:styles": "revving -i build/styles -o dist/styles --mode auto -p '/styles'",
