@@ -4,8 +4,13 @@ const express = require('express')
 const app = require('./lib/app.js')
 const { landingPage } = require('./lib/controller.js')
 
-app.use('/styles', express.static('dist/styles'))
-app.use('/images', express.static('dist/images'))
+app.use('/styles', express.static('dist/styles', { ...immutableCaching() }))
+app.use(
+  '/images',
+  express.static('dist/images', {
+    ...immutableCaching()
+  })
+)
 app.use('/', express.static('favicon'))
 
 const prepareApp = async () => {
@@ -34,3 +39,16 @@ prepareApp()
     console.error(e)
     process.exit(1)
   })
+
+function immutableCaching () {
+  return {
+    immutable: isProduction(),
+    maxAge: isProduction() ? '365d' : 0,
+    etag: isProduction(),
+    lastModified: isProduction()
+  }
+}
+
+function isProduction () {
+  return process.env.NODE_ENV === 'production'
+}
