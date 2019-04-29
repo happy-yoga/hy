@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-html
-  head
-    title happyyoga
-    meta(charset="UTF-8")
-    link(rel="stylesheet" href=assetManifest.ref("/styles/core.css"))
-  body
-    header.container-fluid
-      hero-teaser
-        | fubar
-    main.container-fluid
-      
+extends layouts/base
+
+block content
+  header.container-fluid
+    hero-teaser
+      picture.main-logo
+        source(srcset="/images/happy-yoga-main.svg" type="image/svg+xml")
+        img(src="/images/happy-yoga-main.png" alt="")
+
+
+  main.container-fluid
+    
