@@ -56,7 +56,7 @@ main-nav.announce
   top: 0%
   transform: translateY(-100%)
 
-main-nav.announce.active
+main-nav.announce.is-active
   transition: transform .5s ease
   transform: translateY(0)
 
@@ -74,10 +74,12 @@ main-nav
     color: black
     position: absolute
     top: 100%
-    left: 1rem
-    width: 50px
-    height: 50px
+    left: 0rem
+    padding: 1.2rem 1rem 1rem 1rem
     background-color: #fff
     border: none
     outline: none
     text-align: center
+
+    &:hover
+      opacity: 1 !important

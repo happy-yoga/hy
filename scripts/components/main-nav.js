@@ -1,10 +1,15 @@
 /* global window, HTMLElement, customElements */
 
+const toggleClass = 'hamburger--elastic'
+const hoverClassActive = 'hamburger--minus'
+const hoverClassInactive = 'hamburger--arrow-r'
+
 class MainNav extends HTMLElement {
   constructor (...args) {
     const self = super(...args)
     this._scrollCheckInterval = 100
     this.scrolledDown = false
+    this.active = false
     return self
   }
 
@@ -37,26 +42,97 @@ class MainNav extends HTMLElement {
     }
   }
 
-  toggleNavBar (e) {
+  toggleNavBar () {
     this._toggleNavBar = this._toggleNavBar
       ? this._toggleNavBar
       : e => {
         e.preventDefault()
-        this.classList.toggle('active')
+
+        if (this.active) {
+          this.deActivateNavbar()
+        } else {
+          this.activateNavbar()
+        }
       }
 
     return this._toggleNavBar
   }
 
+  activateNavbar () {
+    this.active = true
+    const toggle = this.activationToggle
+    this.hideToggleHover()
+
+    this.classList.add('is-active')
+    toggle.classList.add(toggleClass)
+    toggle.classList.add('is-active')
+  }
+
+  deActivateNavbar () {
+    this.active = false
+    const toggle = this.activationToggle
+    this.hideToggleHover()
+
+    this.classList.remove('is-active')
+
+    toggle.classList.remove(toggleClass)
+    toggle.classList.remove('is-active')
+  }
+
   addActivationToggle () {
     const toggle = this.activationToggle
     toggle.addEventListener('click', this.toggleNavBar())
+    toggle.addEventListener('mouseover', this.showToggleHover())
+    toggle.addEventListener('mouseout', this.hideToggleHover())
 
     this.appendChild(toggle)
   }
 
+  showToggleHover () {
+    this._showToggleHover = this._showToggleHover
+      ? this._showToggleHover
+      : e => {
+        e.preventDefault()
+
+        const toggle = this.activationToggle
+
+        toggle.classList.remove(toggleClass)
+
+        if (this.active) {
+          toggle.classList.add(hoverClassActive)
+        } else {
+          toggle.classList.add(hoverClassInactive)
+        }
+
+        toggle.classList.add('is-active')
+      }
+
+    return this._showToggleHover
+  }
+
+  hideToggleHover () {
+    this._hideToggleHover = this._hideToggleHover
+      ? this._hideToggleHover
+      : e => {
+        if (e) {
+          e.preventDefault()
+        }
+        const toggle = this.activationToggle
+
+        toggle.classList.add(toggleClass)
+
+        toggle.classList.remove(hoverClassActive)
+
+        toggle.classList.remove(hoverClassInactive)
+
+        toggle.classList.remove('is-active')
+      }
+
+    return this._hideToggleHover
+  }
+
   removeActivationToggle () {
-    this.classList.remove('active')
+    this.deActivateNavbar()
     const toggle = this.activationToggle
     toggle.removeEventListener('click', this.toggleNavBar())
     toggle.remove()
@@ -125,8 +201,19 @@ class MainNav extends HTMLElement {
 
   buildToggle () {
     const toggle = document.createElement('button')
-    toggle.innerHTML = 'X'
     toggle.classList.add('activation-toggle')
+    toggle.classList.add('hamburger')
+    toggle.setAttribute('type', 'button')
+
+    const box = document.createElement('span')
+    box.classList.add('hamburger-box')
+
+    const inner = document.createElement('span')
+    inner.classList.add('hamburger-inner')
+
+    box.appendChild(inner)
+    toggle.appendChild(box)
+
     return toggle
   }
 
