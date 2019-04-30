@@ -14,6 +14,10 @@
     "watch:styles": "chokidar 'styles/**/*' -c 'npm run build:styles' --initial",
     "build:images": "node build/image-build.js -s ./images -o dist/images",
     "watch:images": "chokidar 'images/**/*' -c 'npm run build:images' --initial",
+    "prebuild:js": "rm -rf ./tmp/scripts && ./build/js-build-vendors.sh",
+    "build:js": "rollup scripts/core.js -o tmp/scripts/core.js --format iife",
+    "postbuild:js": "revving -i tmp/scripts -o dist/scripts --mode auto -p '/scripts' -c",
+    "watch:js": "chokidar 'scripts/**/*' -c 'npm run build:js' --initial",
     "build": "run-p build:*",
     "watch": "run-p watch:*"
   },
@@ -22,6 +26,7 @@
     "args": "^5.0.1",
     "bootstrap": "^4.3.1",
     "chokidar-cli": "^1.2.2",
+    "document-register-element": "^1.13.2",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.17.2",
@@ -42,6 +47,7 @@
     "express": "^4.16.4",
     "helmet": "^3.16.0",
     "morgan": "^1.9.1",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "rollup": "^1.10.1"
   }
 }
