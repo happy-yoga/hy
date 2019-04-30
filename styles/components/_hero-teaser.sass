@@ -1,15 +1,22 @@
 @import "../mixins/positioning"
 
-hero-teaser
-  +pos-root
+=hero-full-width-bg
   display: block
   height: 100vh
   min-height: 100%
-  background: url("/images/_julia-schlenkert-yoga-unterricht-anusara.jpg") no-repeat
   background-size: cover
-  background-position: center center
+  background-position: top center
+  background-repeat:  no-repeat
 
-  hero-layer
+hero-teaser
+  background-color: #dedede
+  +pos-root
+  +hero-full-width-bg
+  background-image: url("/images/_julia-schlenkert-yoga-unterricht-anusara_lowc_cropped.jpg")
+
+  // &:before
+  //   content: ''
+
     // +pos-root
     // display: block
     // height: 100vh
@@ -28,3 +35,21 @@ hero-teaser
       +media-breakpoint-between(lg, xl)
         width: 20vw
         max-width: 30rem
+
+  // h1
+  //   // position: absolute
+  //   // top: 30%
+  //   // left: 50%
+  //   // transform: translateX(-50%)
+  //   padding-top: 10rem
+  //   padding-top: 20vh
+  //   text-align: center
+  //   font-size: 7rem
+  //
+  //   +hero-full-width-bg
+  //   width: 100%
+  //   background-image: url("/images/_julia-schlenkert-yoga-unterricht-anusara.jpg")
+  //   -webkit-text-fill-color: transparent
+  //   -webkit-background-clip: text
+  //   background-clip: text
+  //   text-fill-color: transparent

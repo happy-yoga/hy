@@ -9,6 +9,11 @@ main-nav
   z-index: 1
   transition: top .5s ease
 
+  a.link
+    text-decoration: none
+
+  font-family: 'Raleway', sans-serif
+
   main-entries, secondary-entries
     +media-breakpoint-between(lg, xl)
       +make-col-ready
@@ -107,7 +112,7 @@ main-nav
     position: absolute
     top: 100%
     left: 0rem
-    padding: 1.2rem 1rem 1rem 1rem
+    padding: 1.2rem 1rem .5rem 1rem
     background-color: #fff
     border: none
     outline: none
