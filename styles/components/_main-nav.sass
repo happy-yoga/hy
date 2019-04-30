@@ -13,24 +13,25 @@ main-nav
     +media-breakpoint-between(lg, xl)
       +make-col-ready
 
-  main-entries a, main-entries a.link
-    display: none
+  main-entries
+    a,a.link
+      display: none
 
     +media-breakpoint-between(lg, xl)
       +make-col(6)
-      display: block
-      margin-left: 1rem
+      a,a.link
+        display: inline-block
+        margin-left: 1rem
 
   &.is-active
     main-entries
       +media-breakpoint-between(xs, m)
-        //
-      a, a.link
-        display: block !important
-
-
-
-
+        a, a.link
+          display: block
+      +media-breakpoint-between(lg, xl)
+        a, a.link
+          display: inline-block
+          margin-left: 1rem
 
   secondary-entries
     text-align: right
