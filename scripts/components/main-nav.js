@@ -17,6 +17,17 @@ class MainNav extends HTMLElement {
     if (window.requestAnimationFrame) {
       this.registerScrollSpy()
     }
+
+    const mobileToggle = this.mobileToggle
+    mobileToggle.addEventListener('click', this.toggleNavBar(true))
+    mobileToggle.addEventListener(
+      'mouseover',
+      this.showToggleHover(mobileToggle)
+    )
+    mobileToggle.addEventListener(
+      'mouseout',
+      this.hideToggleHover(mobileToggle)
+    )
   }
 
   disconnectedCallback () {
@@ -42,16 +53,31 @@ class MainNav extends HTMLElement {
     }
   }
 
-  toggleNavBar () {
+  toggleNavBar (announce) {
     this._toggleNavBar = this._toggleNavBar
       ? this._toggleNavBar
       : e => {
         e.preventDefault()
 
         if (this.active) {
-          this.deActivateNavbar()
+          if (!this.scrolledDown) {
+            this.deActivateNavbar()
+
+            setTimeout(() => {
+              this.deAnnounceNavbar()
+            }, 500)
+          } else {
+            this.deActivateNavbar()
+          }
         } else {
-          this.activateNavbar()
+          if (announce) {
+            this.announceNavbar()
+            setTimeout(() => {
+              this.activateNavbar()
+            }, 500)
+          } else {
+            this.activateNavbar()
+          }
         }
       }
 
@@ -81,20 +107,18 @@ class MainNav extends HTMLElement {
 
   addActivationToggle () {
     const toggle = this.activationToggle
-    toggle.addEventListener('click', this.toggleNavBar())
-    toggle.addEventListener('mouseover', this.showToggleHover())
-    toggle.addEventListener('mouseout', this.hideToggleHover())
+    toggle.addEventListener('click', this.toggleNavBar(toggle))
+    toggle.addEventListener('mouseover', this.showToggleHover(toggle))
+    toggle.addEventListener('mouseout', this.hideToggleHover(toggle))
 
     this.appendChild(toggle)
   }
 
-  showToggleHover () {
+  showToggleHover (toggle) {
     this._showToggleHover = this._showToggleHover
       ? this._showToggleHover
       : e => {
         e.preventDefault()
-
-        const toggle = this.activationToggle
 
         toggle.classList.remove(toggleClass)
 
@@ -110,14 +134,13 @@ class MainNav extends HTMLElement {
     return this._showToggleHover
   }
 
-  hideToggleHover () {
+  hideToggleHover (toggle) {
     this._hideToggleHover = this._hideToggleHover
       ? this._hideToggleHover
       : e => {
         if (e) {
           e.preventDefault()
         }
-        const toggle = this.activationToggle
 
         toggle.classList.add(toggleClass)
 
@@ -146,7 +169,7 @@ class MainNav extends HTMLElement {
       this.classList.add('announce')
 
       this.addActivationToggle()
-    }, 500)
+    }, 300)
   }
 
   deAnnounceNavbar () {
@@ -220,6 +243,13 @@ class MainNav extends HTMLElement {
   get activationToggle () {
     this._toggle = this._toggle ? this._toggle : this.buildToggle()
     return this._toggle
+  }
+
+  get mobileToggle () {
+    this._mobileToggle = this._mobileToggle
+      ? this._mobileToggle
+      : document.querySelector('.mobile-toggle')
+    return this._mobileToggle
   }
 }
 

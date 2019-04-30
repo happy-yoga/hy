@@ -17,7 +17,13 @@ main-nav
     a,a.link
       display: none
 
+    +media-breakpoint-between(xs, m)
+      +make-col(4)
+
     +media-breakpoint-between(lg, xl)
+      .mobile-toggle
+        display: none
+
       +make-col(6)
       a,a.link
         display: inline-block
@@ -36,7 +42,6 @@ main-nav
   secondary-entries
     text-align: right
     +make-col(8)
-    +make-col-offset(4)
 
     +media-breakpoint-between(lg, xl)
       +make-col(5)
@@ -60,6 +65,12 @@ main-nav
       left: 0
       transform: translateY(-65%)
 
+  button.mobile-toggle
+    position: relative
+    top: 50%
+    left: 0
+    transform: translateY(-65%)
+
 main-nav.prepare
   position: fixed
   top: -200%
@@ -73,6 +84,9 @@ main-nav.announce
   top: 0%
   transform: translateY(-100%)
   border-bottom: 5px solid $primary
+
+  button.mobile-toggle
+    display: none
 
 main-nav.announce.is-active
   transition: transform .5s ease
