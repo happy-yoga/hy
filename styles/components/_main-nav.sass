@@ -13,22 +13,36 @@ main-nav
     +media-breakpoint-between(lg, xl)
       +make-col-ready
 
-  main-entries
+  main-entries a, main-entries a.link
+    display: none
+
     +media-breakpoint-between(lg, xl)
       +make-col(6)
+      display: block
+      margin-left: 1rem
 
-      a
-        margin-left: 1rem
+  &.is-active
+    main-entries
+      +media-breakpoint-between(xs, m)
+        //
+      a, a.link
+        display: block !important
+
+
+
 
 
   secondary-entries
+    text-align: right
+    +make-col(8)
+    +make-col-offset(4)
+
     +media-breakpoint-between(lg, xl)
-      text-align: right
       +make-col(5)
       +make-col-offset(1)
 
-      a
-        margin-right: 1rem
+    a
+      margin-left: 1rem
 
 
   a
@@ -38,10 +52,12 @@ main-nav
   a.link
     display: inline-block
     text-transform: uppercase
-    position: relative
-    top: 50%
-    left: 0
-    transform: translateY(-65%)
+
+    +media-breakpoint-between(lg, xl)
+      position: relative
+      top: 50%
+      left: 0
+      transform: translateY(-65%)
 
 main-nav.prepare
   position: fixed
@@ -55,6 +71,7 @@ main-nav.announce
   transition: top .5s ease
   top: 0%
   transform: translateY(-100%)
+  border-bottom: 5px solid $primary
 
 main-nav.announce.is-active
   transition: transform .5s ease
@@ -80,6 +97,8 @@ main-nav
     border: none
     outline: none
     text-align: center
+
+    border-bottom: 5px solid $primary
 
     &:hover
       opacity: 1 !important
