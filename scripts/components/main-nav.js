@@ -18,6 +18,10 @@ class MainNav extends HTMLElement {
       this.registerScrollSpy()
     }
 
+    this.activateMobileToggle()
+  }
+
+  activateMobileToggle () {
     const mobileToggle = this.mobileToggle
     mobileToggle.addEventListener('click', this.toggleNavBar(true))
     mobileToggle.addEventListener(
@@ -87,8 +91,8 @@ class MainNav extends HTMLElement {
   activateNavbar () {
     this.active = true
     const toggle = this.activationToggle
-    this.hideToggleHover()
-
+    this.hideToggleHover(toggle)
+    toggle.classList.remove(hoverClassActive)
     this.classList.add('is-active')
     toggle.classList.add(toggleClass)
     toggle.classList.add('is-active')
@@ -97,7 +101,7 @@ class MainNav extends HTMLElement {
   deActivateNavbar () {
     this.active = false
     const toggle = this.activationToggle
-    this.hideToggleHover()
+    this.hideToggleHover(toggle)
 
     this.classList.remove('is-active')
 
@@ -115,8 +119,11 @@ class MainNav extends HTMLElement {
   }
 
   showToggleHover (toggle) {
-    this._showToggleHover = this._showToggleHover
-      ? this._showToggleHover
+    this._showToggleHover = this._showToggleHover ? this._showToggleHover : {}
+    const toggleId = toggle.getAttribute('id')
+
+    this._showToggleHover[toggleId] = this._showToggleHover[toggleId]
+      ? this._showToggleHover[toggleId]
       : e => {
         e.preventDefault()
 
@@ -131,12 +138,15 @@ class MainNav extends HTMLElement {
         toggle.classList.add('is-active')
       }
 
-    return this._showToggleHover
+    return this._showToggleHover[toggleId]
   }
 
   hideToggleHover (toggle) {
-    this._hideToggleHover = this._hideToggleHover
-      ? this._hideToggleHover
+    this._hideToggleHover = this._hideToggleHover ? this._hideToggleHover : {}
+    const toggleId = toggle.getAttribute('id')
+
+    this._hideToggleHover[toggleId] = this._hideToggleHover[toggleId]
+      ? this._hideToggleHover[toggleId]
       : e => {
         if (e) {
           e.preventDefault()
@@ -144,20 +154,33 @@ class MainNav extends HTMLElement {
 
         toggle.classList.add(toggleClass)
 
-        toggle.classList.remove(hoverClassActive)
-
-        toggle.classList.remove(hoverClassInactive)
-
-        toggle.classList.remove('is-active')
+        toggle.classList.remove(
+          hoverClassActive,
+          hoverClassInactive,
+          'is-active'
+        )
       }
 
-    return this._hideToggleHover
+    return this._hideToggleHover[toggleId]
+  }
+
+  removeEventListeners (toggle) {
+    toggle.removeEventListener('click', this.toggleNavBar(toggle))
+
+    toggle.removeEventListener('mouseover', this.showToggleHover(toggle))
+    toggle.removeEventListener('mouseout', this.hideToggleHover(toggle))
   }
 
   removeActivationToggle () {
     this.deActivateNavbar()
+
     const toggle = this.activationToggle
-    toggle.removeEventListener('click', this.toggleNavBar())
+    const mobileToggle = this.mobileToggle
+    this.removeEventListeners(toggle)
+    this.removeEventListeners(mobileToggle)
+    this.hideToggleHover(toggle)
+    this.hideToggleHover(mobileToggle)
+
     toggle.remove()
   }
 
@@ -175,6 +198,7 @@ class MainNav extends HTMLElement {
   deAnnounceNavbar () {
     this.classList.add('de-announce')
     this.removeActivationToggle()
+    this.activateMobileToggle()
 
     setTimeout(() => {
       this.classList.remove('de-announce')
@@ -227,6 +251,7 @@ class MainNav extends HTMLElement {
     toggle.classList.add('activation-toggle')
     toggle.classList.add('hamburger')
     toggle.setAttribute('type', 'button')
+    toggle.setAttribute('id', 'active-toggle')
 
     const box = document.createElement('span')
     box.classList.add('hamburger-box')
