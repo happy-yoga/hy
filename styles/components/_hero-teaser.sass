@@ -12,16 +12,12 @@ hero-teaser
   background-color: #dedede
   +pos-root
   +hero-full-width-bg
-  background-image: url("/images/_julia-schlenkert-yoga-unterricht-anusara_lowc_cropped.jpg")
+  // background-image: url("/images/_julia-schlenkert-yoga-unterricht-anusara_lowc_cropped.jpg")
 
-  // &:before
-  //   content: ''
-
-    // +pos-root
-    // display: block
-    // height: 100vh
-    // background-color: transparent
-    // background-color: rgba(230,230,230, 0.5)
+  .layer-bg
+    +pos-root
+    +hero-full-width-bg
+    animation: slide 30s ease-in-out infinite alternate
 
   .main-logo
     img
@@ -53,3 +49,11 @@ hero-teaser
   //   -webkit-background-clip: text
   //   background-clip: text
   //   text-fill-color: transparent
+
+@keyframes slide
+  0%
+    // transform: translateX(-25%)
+    opacity: 0
+  100%
+    // transform: translateX(25%)
+    opacity: 1

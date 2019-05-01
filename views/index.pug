@@ -4,8 +4,8 @@ block content
   header.container-fluid
     include components/main-nav
     
-    hero-teaser(background="/images/_julia-schlenkert-yoga-unterricht-anusara.jpg")  
-      //- h1.clipped the happy place
+    hero-teaser(style="background-image: url(/images/_julia-schlenkert-yoga-unterricht-anusara_bw.jpg)")  
+      .layer-bg(style="background-image: url(/images/_julia-schlenkert-yoga-unterricht-anusara_lowc.jpg)")
       picture.main-logo
         source(srcset="/images/happy-yoga-main.svg" type="image/svg+xml")
         img(src="/images/happy-yoga-main.png" alt="")
