@@ -1,3 +1,5 @@
+/* global define */
+
 // ------------------------------------------
 // Rellax.js
 // Buttery smooth parallax library
@@ -101,10 +103,8 @@
     // Now query selector
     if (elements.length > 0) {
       self.elems = elements
-    }
-
-    // The elements don't exist
-    else {
+    } else {
+      // The elements don't exist
       console.warn("Rellax: The elements you're trying to select don't exist.")
       return
     }
@@ -294,12 +294,12 @@
         posY = scrollPosY - self.options.wrapper.offsetTop
       }
 
-      if (oldY != posY && self.options.vertical) {
+      if (oldY !== posY && self.options.vertical) {
         // scroll changed, return true
         return true
       }
 
-      if (oldX != posX && self.options.horizontal) {
+      if (oldX !== posX && self.options.horizontal) {
         // scroll changed, return true
         return true
       }
