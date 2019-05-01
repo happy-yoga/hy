@@ -4,6 +4,9 @@ const express = require('express')
 const app = require('./lib/app.js')
 const { landingPage } = require('./lib/controller.js')
 const assetLoader = require('./lib/asset-manifest.js')
+const contentfulRenderer = require('./lib/contentful-renderer.js')
+const contentful = require('./lib/contentful-client.js')
+const env = require('./lib/env-helper.js')
 
 app.use('/styles', express.static('dist/styles', { ...immutableCaching() }))
 app.use('/scripts', express.static('dist/scripts', { ...immutableCaching() }))
@@ -20,9 +23,12 @@ const prepareApp = async () => {
   const cssManifest = await assetLoader('dist/styles/manifest.json')
   const scriptManifest = await assetLoader('dist/scripts/manifest.json')
 
-  const viewOptions = { styles: cssManifest, scripts: scriptManifest }
+  const viewOptions = {
+    styles: cssManifest,
+    scripts: scriptManifest
+  }
 
-  app.get('/', landingPage({ viewOptions }))
+  app.get('/', landingPage({ viewOptions, contentfulRenderer, contentful }))
 
   return app
 }
@@ -46,13 +52,9 @@ prepareApp()
 
 function immutableCaching () {
   return {
-    immutable: isProduction(),
-    maxAge: isProduction() ? '365d' : 0,
-    etag: isProduction(),
-    lastModified: isProduction()
+    immutable: env.isProduction(),
+    maxAge: env.isProduction() ? '365d' : 0,
+    etag: env.isProduction(),
+    lastModified: env.isProduction()
   }
-}
-
-function isProduction () {
-  return process.env.NODE_ENV === 'production'
 }

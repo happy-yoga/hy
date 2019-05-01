@@ -1,0 +1,16 @@
+mixin contentArea(elem)
+  content-area(id=(elem.fields.showInMainNav ? elem.sys.id : null))
+    h1= elem.fields.title
+    != cr.richtext(elem.fields.content)
+
+mixin courseOverview(elem)
+  content-area(id=(elem.fields.showInMainNav ? elem.sys.id : null)).full
+    hy-course-overview
+      h2= elem.fields.title
+      +course-overview(courses)
+
+mixin priceCategories(elem)
+  content-area(id=(elem.fields.showInMainNav ? elem.sys.id : null)).full.price-categories-wrapper
+    h2= elem.fields.title
+    +price-categories(priceCategories)
+    
