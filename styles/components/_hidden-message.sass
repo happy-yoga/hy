@@ -1,9 +1,71 @@
 hidden-message
   position: absolute
-  top: -2rem
-  border-bottom: 20px solid transparent
+  top: -14.9rem
+  height: 15rem
   left: 50%
   transform: translateX(-50%)
+  vertical-align: bottom
+  padding-top: 13rem
+  text-align: center
   z-index: 1000
   color: white
   font-family: 'Raleway', sans-serif
+
+.bg-heart
+  // display: block
+  width: 100%
+  // height: 100vh
+  // position: relative
+  // top: 0
+  // left: 0
+  // width: 100%
+  // height: 100%
+  overflow: hidden
+
+.heart
+  // display: none
+  position: absolute
+  top: -800%
+  -webkit-transform: rotate(-45deg)
+  -moz-transform: rotate(-45deg)
+  -m-transform: rotate(-45deg)
+  transform: rotate(-45deg)
+
+.heart:before
+  position: absolute
+  top: -50%
+  left: 0
+  display: block
+  content: ""
+  width: 100%
+  height: 100%
+  background: inherit
+  border-radius: 100%
+
+
+.heart:after
+  position: absolute
+  top: 0
+  right: -50%
+  display: block
+  content: ""
+  width: 100%
+  height: 100%
+  background: inherit
+  border-radius: 100%
+
+@-webkit-keyframes love
+  0%
+    top: 70%
+
+@-moz-keyframes love
+  0%
+    top: 70%
+
+@-ms-keyframes love
+  0%
+    top: 70%
+
+@keyframes love
+  0%
+    top: 70%

@@ -25,7 +25,8 @@ const prepareApp = async () => {
 
   const viewOptions = {
     styles: cssManifest,
-    scripts: scriptManifest
+    scripts: scriptManifest,
+    pretty: true
   }
 
   app.get('/', landingPage({ viewOptions, contentfulRenderer, contentful }))
