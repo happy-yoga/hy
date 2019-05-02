@@ -25,14 +25,13 @@ class HiddenMessage extends HTMLElement {
   }
 
   connectedCallback () {
-    console.log('connected')
-    this.interval = setInterval(function () {
-      var rNum = Math.floor(Math.random() * 40) + 1
-      var rSize = Math.floor(Math.random() * 15) + 10
-      var rLeft = Math.floor(Math.random() * 100) + 1
-      var rTime = Math.floor(Math.random() * 5) + 5
+    this.createInterval = setInterval(() => {
+      const rNum = Math.floor(Math.random() * 40) + 1
+      const rSize = Math.floor(Math.random() * 15) + 10
+      const rLeft = Math.floor(Math.random() * 100) + 1
+      const rTime = Math.floor(Math.random() * 5) + 5
 
-      var bgHeart = document.querySelector('.bg-heart')
+      const bgHeart = document.querySelector('.bg-heart')
       bgHeart.innerHTML =
         'happy body. happy life.' +
         buildHeart(rSize, rLeft, 0, rTime) +
@@ -40,22 +39,25 @@ class HiddenMessage extends HTMLElement {
         buildHeart(rSize - 7, rLeft + 15, rNum, rTime + 4) +
         buildHeart(rSize - 2, rLeft + 3, rNum, rTime + 1) +
         buildHeart(rSize - 10, rLeft + 7, rNum, rTime + 5)
+    }, 500)
 
-      var hearts = document.querySelectorAll('.heart')
-
+    this.removeInterval = setInterval(() => {
+      const hearts = document.querySelectorAll('.heart')
       hearts.forEach(function (heart) {
-        var top = heart.style.top.replace(/[^-\d\.]/g, '')
-        // var width = heart.style.width.replace(/[^-\d\.]/g, '')
+        const top = heart.style.top.replace(/[^-\d\.]/g, '')
+
         if (top <= -100) {
-          heart.remove()
+          // heart.remove()
+          console.log(heart)
         }
       })
-    }, 500)
+    })
   }
 
   disconnectedCallback () {
     if (this.interval) {
-      clearInterval(this.interval)
+      clearInterval(this.createInterval)
+      clearInterval(this.removeInterval)
     }
   }
 }
