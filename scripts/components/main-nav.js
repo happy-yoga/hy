@@ -1,4 +1,4 @@
-/* global window, HTMLElement, customElements */
+/* global window, HTMLElement, customElements, happyState */
 
 const toggleClass = 'hamburger--elastic'
 const hoverClassActive = 'hamburger--minus'
@@ -10,6 +10,7 @@ class MainNav extends HTMLElement {
     this._scrollCheckInterval = 100
     this.scrolledDown = false
     this.active = false
+    this.state = window.happyState = window.happyState || {}
     return self
   }
 
@@ -45,11 +46,13 @@ class MainNav extends HTMLElement {
 
       if (!this.scrolledDown && pageOffset > 50) {
         this.scrolledDown = true
+        this.state.scrolledDown = this.scrolledDown
         window.requestAnimationFrame(this.announceNavbar.bind(this))
       }
 
       if (this.scrolledDown && pageOffset === 0) {
         this.scrolledDown = false
+        this.state.scrolledDown = this.scrolledDown
         window.requestAnimationFrame(this.deAnnounceNavbar.bind(this))
       }
 
