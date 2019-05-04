@@ -13,4 +13,27 @@ mixin priceCategories(elem)
   content-area(id=(elem.fields.showInMainNav ? elem.sys.id : null)).full.price-categories-wrapper
     h2= elem.fields.title
     +price-categories(priceCategories)
+
+
+mixin imageWallImage(image)
+  if image
+    .wall-image(style=`background-image: url(${image.fields.file.url})`)
+
+mixin imageWallContent(elem)
+  .wall-content
+    .wall-content-wrapper
+      if elem.fields.title
+        h2= elem.fields.title
+      if elem.fields.content
+        != cr.richtext(elem.fields.content)
+  
+mixin imageWall(elem)
+  image-wall
+    - const image = elem.fields.wallImage
     
+    if elem.fields.imagePosition && elem.fields.imagePosition === "left"
+      +imageWallImage(image)
+      +imageWallContent(elem)
+    else
+      +imageWallContent(elem)
+      +imageWallImage(image)

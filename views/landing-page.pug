@@ -15,9 +15,10 @@ block content
 
 
   main.container-fluid
+    
     each contentArea in page.contentAreas
-      if cr.contentTypeExistsIn(contentArea, 'contentArea', 'courseOverview', 'priceCategories') 
-        +#{cr.contentTypeId(contentArea)}(contentArea)
+      //- if cr.contentTypeExistsIn(contentArea, 'contentArea', 'courseOverview', 'priceCategories', ) 
+      +#{cr.contentTypeId(contentArea)}(contentArea)
 
         
   script(src=scripts.ref("/scripts/vendor/rellax-patched.js"))

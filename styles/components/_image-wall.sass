@@ -1,0 +1,22 @@
+image-wall
+  +media-breakpoint-between(l, xl)
+    +make-container(0)
+    +make-row(0)
+
+    .wall-content, .wall-image
+      +make-col(6)
+
+    .wall-content
+      min-height: 45rem
+
+    .wall-content-wrapper
+      padding: 5rem
+      position: relative
+      top: 50%
+      transform: translateY(-50%)
+
+
+    .wall-image
+      background-size: cover
+      background-position: center center
+      background-repeat:  no-repeat
