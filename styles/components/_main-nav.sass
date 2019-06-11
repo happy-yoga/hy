@@ -1,10 +1,11 @@
 main-nav
+  +make-row
+  +make-container
+  +special-text
   position: absolute
   top: 0
   left: 0
   background-color: transparent
-  +make-row
-  +make-container
   padding-top: 1rem
   z-index: 1
   transition: top .5s ease
@@ -12,10 +13,8 @@ main-nav
   a.link
     text-decoration: none
 
-  font-family: 'Raleway', sans-serif
-
   main-entries, secondary-entries
-    +media-breakpoint-between(lg, xl)
+    +media-breakpoint-up(lg)
       +make-col-ready
 
   main-entries
@@ -25,7 +24,7 @@ main-nav
     +media-breakpoint-between(xs, m)
       +make-col(4)
 
-    +media-breakpoint-between(lg, xl)
+    +media-breakpoint-up(lg)
       .mobile-toggle
         display: none
 
@@ -41,7 +40,7 @@ main-nav
       +media-breakpoint-between(xs, m)
         a, a.link
           display: block
-      +media-breakpoint-between(lg, xl)
+      +media-breakpoint-up(lg)
         a, a.link
           display: inline-block
           margin-left: 1rem
@@ -52,7 +51,7 @@ main-nav
     text-align: right
     +make-col(8)
 
-    +media-breakpoint-between(lg, xl)
+    +media-breakpoint-up(lg)
       +make-col(5)
       +make-col-offset(1)
 

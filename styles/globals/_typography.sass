@@ -1,1 +1,42 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:200,400')
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,200i,500|Raleway:200,900')
+
+=special-text
+  font-family: 'Raleway', sans-serif
+
+=copy-text
+  font-family: 'Poppins', sans-serif
+  // letter-spacing: .05em
+  font-weight: 200
+  font-size: 1.2rem
+  line-height: 1.7rem
+
+=headline-text
+  font-family: 'Raleway', sans-serif
+
+body
+  +copy-text
+
+h1,h2,h3
+  +headline-text
+  line-height: 1.3em
+
+h1
+  font-size: 2.5rem
+  margin-bottom: 1.7rem
+
+h2
+  font-size: 2rem
+  margin-bottom: 1rem
+
+h3
+  font-size: 1.75rem
+  margin-bottom: 1rem
+
+blockquote
+  border-left: 5px solid $primary
+  padding-left: 1rem
+  font-style: italic
+
+figcaption
+  font-size: 0.85rem
+  font-style: italic

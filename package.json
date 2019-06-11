@@ -9,7 +9,7 @@
     "start": "node index.js",
     "watch:start": "nodemon --watch index.js --watch lib/**/* --exec 'npm start'",
     "prebuild:styles": "rm -rf tmp/styles dist/styles && ./build/css-vendor-build.sh",
-    "build:styles": "sass --embed-sources ./styles:./tmp/styles -I 'node_modules/bootstrap/scss' -I 'node_modules/hamburgers/_sass'",
+    "build:styles": "sass --embed-source-map --source-map-urls=absolute ./styles:./tmp/styles -I 'node_modules/bootstrap/scss' -I 'node_modules/hamburgers/_sass'",
     "postbuild:styles": "revving -i tmp/styles -o dist/styles --mode auto -p '/styles' -c",
     "watch:styles": "chokidar 'styles/**/*' -c 'npm run build:styles' --initial",
     "build:images": "node build/image-build.js -s ./images -o dist/images",
